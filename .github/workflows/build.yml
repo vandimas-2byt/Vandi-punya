@@ -17,15 +17,12 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y openjdk-17-jdk zlib1g-dev libssl-dev build-essential ccache git libffi-dev libltdl-dev libsqlite3-dev
           pip install --upgrade pip
-          pip install buildozer kivy
-
-      - name: Auto Accept All Android Licenses
-        run: |
-          mkdir -p ~/.android
-          touch ~/.android/repositories.cfg
+          pip install "cython<3.0.0" buildozer kivy
 
       - name: Build APK with Buildozer
         run: |
+          mkdir -p ~/.android
+          touch ~/.android/repositories.cfg
           yes | buildozer android debug
 
       - name: Upload APK Artifact
